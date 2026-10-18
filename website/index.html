@@ -46,8 +46,10 @@ nav a:hover { color: var(--ink); }
 .btn { display: inline-block; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 500; font-size: 15px; border: 1px solid var(--ink); }
 .btn.primary { background: var(--ink); color: var(--bg); }
 .btn:hover { opacity: .85; }
-.shot { justify-self: center; width: 100%; max-width: 300px; border: 1px solid var(--rule); border-radius: 22px; padding: 8px; background: var(--surface); }
-.shot img { display: block; width: 100%; border-radius: 15px; }
+.phone { position: relative; width: 100%; max-width: 250px; margin: 0 auto; padding: 9px; background: #0d1117; border-radius: 34px; box-shadow: 0 0 0 1px #2a3240, 0 18px 40px -18px rgba(13,17,23,.45); }
+.phone::before { content: ""; position: absolute; top: 15px; left: 50%; width: 54px; height: 14px; margin-left: -27px; background: #0d1117; border-radius: 10px; z-index: 1; }
+.phone img { display: block; width: 100%; height: auto; aspect-ratio: 400 / 820; object-fit: cover; border-radius: 26px; }
+.shot { justify-self: center; width: 100%; }
 
 section { padding: 56px 0; border-top: 1px solid var(--rule); }
 section h2 { font-size: 30px; margin-bottom: 10px; }
@@ -66,9 +68,11 @@ section .sub { color: var(--muted); max-width: 40em; margin: 0 0 32px; }
 .feats p { margin: 0; color: var(--muted); font-size: 15px; }
 
 pre { background: var(--code); border: 1px solid var(--rule); border-radius: 8px; padding: 18px 20px; font-size: 13.5px; line-height: 1.6; overflow-x: auto; margin: 0; }
-.gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
 .gallery figure { margin: 0; }
-.gallery img { width: 100%; display: block; border: 1px solid var(--rule); border-radius: 12px; }
+.gallery .phone { max-width: 190px; padding: 7px; border-radius: 28px; }
+.gallery .phone::before { top: 12px; width: 40px; height: 11px; margin-left: -20px; }
+.gallery .phone img { border-radius: 21px; }
 .gallery figcaption { font-size: 13px; color: var(--muted); margin-top: 8px; text-align: center; }
 
 .guide { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; border: 1px solid var(--rule); border-radius: 10px; padding: 28px; background: var(--surface); }
@@ -84,7 +88,8 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   .three { grid-template-columns: 1fr; }
   .three div + div { border-left: 0; border-top: 1px solid var(--rule); }
   .feats { grid-template-columns: 1fr; }
-  .gallery { grid-template-columns: repeat(2, 1fr); }
+  .gallery { grid-template-columns: repeat(2, 1fr); gap: 20px 14px; }
+  .phone { max-width: 220px; }
 }
 </style>
 </head>
@@ -114,7 +119,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
         <a class="btn" href="dolphin-guide.pdf">Download the guide (PDF)</a>
       </div>
     </div>
-    <div class="shot"><img src="assets/light.png" alt="A dolphin walkthrough step highlighting a button" width="400" height="820"></div>
+    <div class="shot"><div class="phone"><img src="assets/light.png" alt="A dolphin walkthrough step highlighting a button" width="400" height="820"></div></div>
   </div>
 
   <section id="how">
@@ -144,10 +149,10 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     <h2>In your app</h2>
     <p class="sub">Screens from the example app included with the package.</p>
     <div class="gallery">
-      <figure><img src="assets/light.png" alt="Card tooltip in light mode"><figcaption>Card style</figcaption></figure>
-      <figure><img src="assets/dark.png" alt="Card tooltip in dark mode"><figcaption>Dark mode</figcaption></figure>
-      <figure><img src="assets/bubble.png" alt="Bubble tooltip with dots pointer"><figcaption>Bubble style</figcaption></figure>
-      <figure><img src="assets/progress.png" alt="Settings page with progress"><figcaption>Progress and reset</figcaption></figure>
+      <figure><div class="phone"><img src="assets/light.png" alt="Card tooltip in light mode" width="400" height="820"></div><figcaption>Card style</figcaption></figure>
+      <figure><div class="phone"><img src="assets/dark.png" alt="Card tooltip in dark mode" width="400" height="820"></div><figcaption>Dark mode</figcaption></figure>
+      <figure><div class="phone"><img src="assets/bubble.png" alt="Bubble tooltip with dots pointer" width="400" height="820"></div><figcaption>Bubble style</figcaption></figure>
+      <figure><div class="phone"><img src="assets/progress.png" alt="Settings page with progress" width="400" height="820"></div><figcaption>Progress and reset</figcaption></figure>
     </div>
   </section>
 
