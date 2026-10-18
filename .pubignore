@@ -1,0 +1,12 @@
+.github/
+.idea/
+.vscode/
+build/
+.dart_tool/
+example/build/
+example/.dart_tool/
+example/ios/Pods/
+*.iml
+coverage/
+doc/banner_source/
+website/

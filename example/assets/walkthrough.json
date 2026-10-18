@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "theme": {
+    "barrierColor": "#B3000000",
+    "highlightBorderColor": "#FFFFC107",
+    "highlightBorderWidth": 2,
+    "counterFormat": "{current} of {total}"
+  },
+  "scopes": {
+    "home": {
+      "sequence": ["search", "openDetails", "fab", "settings"],
+      "steps": {
+        "search": {
+          "title": "Search everything",
+          "description": "Find products, orders and people from one place.",
+          "shape": "circle",
+          "tooltipStyle": "card"
+        },
+        "settings": {
+          "title": "Settings",
+          "description": "Rewatch this guide, reset a section, or turn tips off.",
+          "shape": "circle",
+          "pointerX": 0.9
+        },
+        "openDetails": {
+          "title": "Open the details page",
+          "description": "Tap the button itself. The guide continues on the next page and picks up here when you come back.",
+          "targetTap": "passThroughAndAdvance",
+          "showNext": false
+        },
+        "fab": {
+          "title": "Create something",
+          "description": "Shown from the central JSON with the bubble style.",
+          "tooltipStyle": "bubble",
+          "shape": "stadium"
+        }
+      }
+    },
+    "details": {
+      "steps": {
+        "promo": {
+          "tooltipStyle": "promo",
+          "title": "Go premium",
+          "cta": "Try it free",
+          "condition": "notPremium"
+        }
+      }
+    },
+    "page4": {
+      "steps": {
+        "p4a": { "title": "Page 4 / step 1", "description": "Journey leg 1." },
+        "p4b": { "title": "Page 4 / step 2", "description": "Journey leg 1.", "tooltipStyle": "glass" },
+        "p4c": { "title": "Page 4 / step 3", "description": "Journey leg 1.", "tooltipStyle": "minimal" },
+        "p4d": { "title": "Page 4 / step 4", "description": "Journey leg 1.", "tooltipStyle": "compact" },
+        "p4e": { "title": "Page 4 / step 5", "description": "Next: the journey opens page 8 for you.", "tooltipStyle": "banner" }
+      }
+    },
+    "page8": {
+      "steps": {
+        "p8a": { "title": "Page 8 / step 1", "description": "Journey leg 2." },
+        "p8b": { "title": "Page 8 / step 2", "description": "Journey leg 2.", "position": "above" },
+        "p8c": { "title": "Page 8 / step 3", "description": "That's the end of the journey." }
+      }
+    }
+  },
+  "journeys": {
+    "tour": [
+      { "scope": "page4", "route": "/page4" },
+      { "scope": "page8", "route": "/page8" }
+    ]
+  }
+}

@@ -1,0 +1,37 @@
+name: Bug report
+description: Something in dolphin doesn't work as expected.
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What you expected, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: The smallest code or steps that show the problem.
+      render: dart
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: dolphin version
+      placeholder: 1.0.0
+    validations:
+      required: true
+  - type: textarea
+    id: doctor
+    attributes:
+      label: flutter doctor -v
+      render: text
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      multiple: true
+      options: [Android, iOS, Web, macOS, Windows, Linux]

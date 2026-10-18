@@ -1,0 +1,39 @@
+name: dolphin
+description: Guided walkthroughs and showcase tooltips for Flutter that remember what each user has seen, resume across pages and sync progress.
+version: 1.0.0
+homepage: https://sanketmanohar.com
+repository: https://github.com/sanket-manohar/dolphin
+issue_tracker: https://github.com/sanket-manohar/dolphin/issues
+documentation: https://github.com/sanket-manohar/dolphin#readme
+topics:
+  - walkthrough
+  - showcase
+  - onboarding
+  - tutorial
+  - tooltip
+
+environment:
+  sdk: ">=3.6.0 <4.0.0"
+  flutter: ">=3.27.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  shared_preferences: ^2.2.0
+  sqflite: ^2.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  sqflite_common_ffi: ^2.3.0
+
+screenshots:
+  - description: A walkthrough step highlighting a button with the card tooltip.
+    path: doc/screenshots/light.png
+  - description: Dark mode, following the app theme automatically.
+    path: doc/screenshots/dark.png
+  - description: The bubble tooltip style with the dots pointer.
+    path: doc/screenshots/bubble.png
+  - description: The settings page with rewatch, reset and progress export.
+    path: doc/screenshots/progress.png

@@ -1,0 +1,27 @@
+# Dart and Flutter
+.dart_tool/
+.packages
+.pub/
+.pub-cache/
+build/
+pubspec.lock
+.flutter-plugins
+.flutter-plugins-dependencies
+coverage/
+doc/api/
+
+# Example app generated files
+example/android/local.properties
+example/android/app/src/main/java/io/flutter/plugins/
+example/ios/Flutter/ephemeral/
+example/ios/Flutter/Generated.xcconfig
+example/ios/Flutter/flutter_export_environment.sh
+example/ios/Runner/GeneratedPluginRegistrant.*
+example/ios/Pods/
+example/pubspec.lock
+
+# IDE and OS
+.idea/
+*.iml
+.vscode/
+.DS_Store

@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dolphin · Guided walkthroughs for Flutter</title>
+<meta name="description" content="dolphin is a Flutter package for guided walkthroughs and showcase tooltips that remember what each user has seen, resume across pages and sync progress.">
+<meta name="author" content="Sanket Santosh Vidya Manohar">
+<link rel="canonical" href="https://sanket-manohar.github.io/dolphin/">
+<meta property="og:title" content="dolphin · Guided walkthroughs for Flutter">
+<meta property="og:description" content="Walkthroughs that remember where every user left off. Free to use, for Android, iOS and web.">
+<meta property="og:image" content="https://raw.githubusercontent.com/sanket-manohar/dolphin/main/doc/banner.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root { --bg: #fbfaf7; --surface: #ffffff; --ink: #16202f; --muted: #5b6574; --rule: #e3e1db; --accent: #1A4FD0; --code: #f3f2ee; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #11151c; --surface: #171c25; --ink: #e8eaee; --muted: #9aa3b2; --rule: #273040; --accent: #8fb0ff; --code: #1c2230; }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.65 Inter, system-ui, sans-serif; }
+a { color: inherit; }
+.wrap { max-width: 980px; margin: 0 auto; padding: 0 24px; }
+h1, h2, h3 { font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; line-height: 1.2; margin: 0; }
+code, pre { font-family: 'JetBrains Mono', ui-monospace, monospace; font-variant-ligatures: none; }
+
+header { border-bottom: 1px solid var(--rule); }
+header .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: 'Source Serif 4', serif; font-weight: 700; font-size: 21px; }
+.brand img { width: 28px; height: 28px; }
+nav { display: flex; gap: 22px; font-size: 14.5px; }
+nav a { text-decoration: none; color: var(--muted); }
+nav a:hover { color: var(--ink); }
+
+.hero { padding: 72px 0 56px; display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+.eyebrow { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+.hero h1 { font-size: clamp(36px, 5vw, 52px); letter-spacing: -.01em; }
+.hero p.lead { color: var(--muted); font-size: 18px; margin: 18px 0 28px; max-width: 34em; }
+.install { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: var(--code); border: 1px solid var(--rule); border-radius: 8px; padding: 10px 10px 10px 16px; max-width: 420px; font-size: 14.5px; }
+.install button { border: 1px solid var(--rule); background: var(--surface); color: var(--ink); border-radius: 6px; padding: 5px 12px; font: 500 13px Inter, sans-serif; cursor: pointer; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+.btn { display: inline-block; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 500; font-size: 15px; border: 1px solid var(--ink); }
+.btn.primary { background: var(--ink); color: var(--bg); }
+.btn:hover { opacity: .85; }
+.shot { justify-self: center; width: 100%; max-width: 300px; border: 1px solid var(--rule); border-radius: 22px; padding: 8px; background: var(--surface); }
+.shot img { display: block; width: 100%; border-radius: 15px; }
+
+section { padding: 56px 0; border-top: 1px solid var(--rule); }
+section h2 { font-size: 30px; margin-bottom: 10px; }
+section .sub { color: var(--muted); max-width: 40em; margin: 0 0 32px; }
+
+.three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--rule); border-radius: 10px; background: var(--surface); }
+.three div { padding: 24px; }
+.three div + div { border-left: 1px solid var(--rule); }
+.three code { font-size: 14px; color: var(--accent); }
+.three h3 { font-size: 19px; margin: 8px 0 6px; }
+.three p { margin: 0; color: var(--muted); font-size: 15px; }
+
+.feats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 48px; }
+.feats div { padding: 18px 0; border-bottom: 1px solid var(--rule); }
+.feats h3 { font-size: 18px; margin-bottom: 4px; }
+.feats p { margin: 0; color: var(--muted); font-size: 15px; }
+
+pre { background: var(--code); border: 1px solid var(--rule); border-radius: 8px; padding: 18px 20px; font-size: 13.5px; line-height: 1.6; overflow-x: auto; margin: 0; }
+.gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.gallery figure { margin: 0; }
+.gallery img { width: 100%; display: block; border: 1px solid var(--rule); border-radius: 12px; }
+.gallery figcaption { font-size: 13px; color: var(--muted); margin-top: 8px; text-align: center; }
+
+.guide { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; border: 1px solid var(--rule); border-radius: 10px; padding: 28px; background: var(--surface); }
+.guide h3 { font-size: 22px; margin-bottom: 4px; }
+.guide p { margin: 0; color: var(--muted); }
+
+footer { border-top: 1px solid var(--rule); padding: 28px 0 40px; font-size: 14px; color: var(--muted); }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+
+@media (max-width: 760px) {
+  nav a.hide-s { display: none; }
+  .hero { grid-template-columns: 1fr; padding: 44px 0 40px; gap: 36px; }
+  .three { grid-template-columns: 1fr; }
+  .three div + div { border-left: 0; border-top: 1px solid var(--rule); }
+  .feats { grid-template-columns: 1fr; }
+  .gallery { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="#"><img src="assets/logo.svg" alt="" width="28" height="28">dolphin</a>
+    <nav>
+      <a class="hide-s" href="#how">How it works</a>
+      <a class="hide-s" href="#start">Get started</a>
+      <a href="https://pub.dev/packages/dolphin">pub.dev</a>
+      <a href="https://github.com/sanket-manohar/dolphin">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <div>
+      <p class="eyebrow">Flutter package · Android, iOS, web</p>
+      <h1>Guided walkthroughs that remember where every user left off.</h1>
+      <p class="lead">Highlight any widget, explain it, and let dolphin track what each user has seen on every page. No key lists, no manager class, no bookkeeping.</p>
+      <div class="install"><code id="cmd">flutter pub add dolphin</code><button type="button" id="copy">Copy</button></div>
+      <div class="actions">
+        <a class="btn primary" href="#start">Get started</a>
+        <a class="btn" href="dolphin-guide.pdf">Download the guide (PDF)</a>
+      </div>
+    </div>
+    <div class="shot"><img src="assets/light.png" alt="A dolphin walkthrough step highlighting a button" width="400" height="820"></div>
+  </div>
+
+  <section id="how">
+    <h2>How it works</h2>
+    <p class="sub">Three widgets, each with a single job. Add a walkthrough to an existing app without restructuring it.</p>
+    <div class="three">
+      <div><code>Dolphin</code><h3>Once, for the app</h3><p>Wraps your app above MaterialApp. Stores progress and draws the overlay on every page.</p></div>
+      <div><code>DolphinScope</code><h3>One per page</h3><p>The unit of progress. Starts by itself, pauses when covered and resumes at the same step.</p></div>
+      <div><code>DolphinTarget</code><h3>One per widget</h3><p>Wraps what you want to explain. Only needs an id; the text can live in one central JSON.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>What it does</h2>
+    <p class="sub">Everything a production onboarding flow needs, built in.</p>
+    <div class="feats">
+      <div><h3>Starts on its own</h3><p>Each page with unseen tips begins its walkthrough automatically.</p></div>
+      <div><h3>Remembers progress</h3><p>Seen and skipped steps are saved on the device, per page.</p></div>
+      <div><h3>Journeys across pages</h3><p>Guide users through several pages in a fixed order, and resume later.</p></div>
+      <div><h3>Central JSON</h3><p>Change tip text and styling from your server without an app update.</p></div>
+      <div><h3>Sync with your backend</h3><p>Export and import progress as plain JSON, so new devices skip what users have seen.</p></div>
+      <div><h3>Looks right everywhere</h3><p>Six tooltip styles, eight highlight shapes, light and dark mode.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>In your app</h2>
+    <p class="sub">Screens from the example app included with the package.</p>
+    <div class="gallery">
+      <figure><img src="assets/light.png" alt="Card tooltip in light mode"><figcaption>Card style</figcaption></figure>
+      <figure><img src="assets/dark.png" alt="Card tooltip in dark mode"><figcaption>Dark mode</figcaption></figure>
+      <figure><img src="assets/bubble.png" alt="Bubble tooltip with dots pointer"><figcaption>Bubble style</figcaption></figure>
+      <figure><img src="assets/progress.png" alt="Settings page with progress"><figcaption>Progress and reset</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="start">
+    <h2>Get started</h2>
+    <p class="sub">Add the package, wrap your app once, then mark a page and the widgets to explain.</p>
+<pre><code>import 'package:dolphin/dolphin.dart';
+
+final guide = DolphinController();
+
+void main() => runApp(
+      Dolphin(controller: guide, child: const MaterialApp(home: HomePage())),
+    );
+
+// On any page:
+DolphinScope(
+  id: 'home',
+  child: Scaffold(
+    appBar: AppBar(actions: [
+      DolphinTarget(
+        id: 'search',
+        title: 'Search',
+        description: 'Find anything from here.',
+        child: IconButton(icon: const Icon(Icons.search), onPressed: () {}),
+      ),
+    ]),
+  ),
+);</code></pre>
+  </section>
+
+  <section>
+    <div class="guide">
+      <div><h3>Setup and Developer Guide</h3><p>Installation, quick start, customising, journeys, sync and troubleshooting, in 11 pages.</p></div>
+      <a class="btn primary" href="dolphin-guide.pdf">Download PDF</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 <a href="https://sanketmanohar.com">Sanket Santosh Vidya Manohar</a></span>
+    <span>Free to use under the <a href="https://github.com/sanket-manohar/dolphin/blob/main/LICENSE">BSD 3-Clause License</a>. Provided as is, without warranty.</span>
+  </div>
+</footer>
+
+<script>
+document.getElementById('copy').addEventListener('click', function () {
+  var b = this;
+  navigator.clipboard.writeText(document.getElementById('cmd').textContent).then(function () {
+    b.textContent = 'Copied';
+    setTimeout(function () { b.textContent = 'Copy'; }, 1500);
+  }).catch(function () {});
+});
+</script>
+</body>
+</html>
