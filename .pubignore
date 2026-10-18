@@ -9,4 +9,4 @@ example/ios/Pods/
 *.iml
 coverage/
 doc/banner_source/
-website/
+docs/
