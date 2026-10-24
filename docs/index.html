@@ -4,158 +4,130 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>dolphin · Guided walkthroughs for Flutter</title>
-<meta name="description" content="dolphin is a Flutter package for guided walkthroughs and showcase tooltips that remember what each user has seen, resume across pages and sync progress.">
+<meta name="description" content="dolphin is a Flutter package for guided walkthroughs and showcase tooltips that remember what each user has seen, resume across pages and sync progress. Dolphin Walkthroughs brings it to VS Code.">
 <meta name="author" content="Sanket Santosh Vidya Manohar">
 <link rel="canonical" href="https://sanket-manohar.github.io/dolphin/">
 <meta property="og:title" content="dolphin · Guided walkthroughs for Flutter">
-<meta property="og:description" content="Walkthroughs that remember where every user left off. Free to use, for Android, iOS and web.">
-<meta property="og:image" content="https://raw.githubusercontent.com/sanket-manohar/dolphin/main/doc/banner.png">
+<meta property="og:description" content="Walkthroughs that remember where every user left off. Free to use, for Android, iOS and web, with a VS Code extension.">
+<meta property="og:image" content="https://sanket-manohar.github.io/dolphin/assets/vscode/banner.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-<style>
-:root { color-scheme: light; --bg: #fbfaf7; --surface: #ffffff; --ink: #16202f; --muted: #5b6574; --rule: #e3e1db; --accent: #1A4FD0; --code: #f3f2ee; }
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.65 Inter, system-ui, sans-serif; }
-a { color: inherit; }
-.wrap { max-width: 980px; margin: 0 auto; padding: 0 24px; }
-h1, h2, h3 { font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; line-height: 1.2; margin: 0; }
-code, pre { font-family: 'JetBrains Mono', ui-monospace, monospace; font-variant-ligatures: none; }
-
-header { border-bottom: 1px solid var(--rule); }
-header .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-.brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: 'Source Serif 4', serif; font-weight: 700; font-size: 21px; }
-.brand img { width: 28px; height: 28px; }
-nav { display: flex; gap: 22px; font-size: 14.5px; }
-nav a { text-decoration: none; color: var(--muted); }
-nav a:hover { color: var(--ink); }
-
-.hero { padding: 72px 0 56px; display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
-.eyebrow { font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
-.hero h1 { font-size: clamp(36px, 5vw, 52px); letter-spacing: -.01em; }
-.hero p.lead { color: var(--muted); font-size: 18px; margin: 18px 0 28px; max-width: 34em; }
-.install { display: flex; align-items: center; justify-content: space-between; gap: 12px; background: var(--code); border: 1px solid var(--rule); border-radius: 8px; padding: 10px 10px 10px 16px; max-width: 420px; font-size: 14.5px; }
-.install button { border: 1px solid var(--rule); background: var(--surface); color: var(--ink); border-radius: 6px; padding: 5px 12px; font: 500 13px Inter, sans-serif; cursor: pointer; }
-.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
-.btn { display: inline-block; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: 500; font-size: 15px; border: 1px solid var(--ink); }
-.btn.primary { background: var(--ink); color: var(--bg); }
-.btn:hover { opacity: .85; }
-.phone { position: relative; width: 100%; max-width: 250px; margin: 0 auto; padding: 9px; background: #0d1117; border-radius: 34px; box-shadow: 0 0 0 1px #2a3240, 0 18px 40px -18px rgba(13,17,23,.45); }
-.phone::before { content: ""; position: absolute; top: 15px; left: 50%; width: 54px; height: 14px; margin-left: -27px; background: #0d1117; border-radius: 10px; z-index: 1; }
-.phone img { display: block; width: 100%; height: auto; aspect-ratio: 400 / 820; object-fit: cover; border-radius: 26px; }
-.shot { justify-self: center; width: 100%; }
-
-section { padding: 56px 0; border-top: 1px solid var(--rule); }
-section h2 { font-size: 30px; margin-bottom: 10px; }
-section .sub { color: var(--muted); max-width: 40em; margin: 0 0 32px; }
-
-.three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--rule); border-radius: 10px; background: var(--surface); }
-.three div { padding: 24px; }
-.three div + div { border-left: 1px solid var(--rule); }
-.three code { font-size: 14px; color: var(--accent); }
-.three h3 { font-size: 19px; margin: 8px 0 6px; }
-.three p { margin: 0; color: var(--muted); font-size: 15px; }
-
-.feats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 48px; }
-.feats div { padding: 18px 0; border-bottom: 1px solid var(--rule); }
-.feats h3 { font-size: 18px; margin-bottom: 4px; }
-.feats p { margin: 0; color: var(--muted); font-size: 15px; }
-
-pre { background: var(--code); border: 1px solid var(--rule); border-radius: 8px; padding: 18px 20px; font-size: 13.5px; line-height: 1.6; overflow-x: auto; margin: 0; }
-.gallery { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
-.gallery figure { margin: 0; }
-.gallery .phone { max-width: 190px; padding: 7px; border-radius: 28px; }
-.gallery .phone::before { top: 12px; width: 40px; height: 11px; margin-left: -20px; }
-.gallery .phone img { border-radius: 21px; }
-.gallery figcaption { font-size: 13px; color: var(--muted); margin-top: 8px; text-align: center; }
-
-.guide { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; border: 1px solid var(--rule); border-radius: 10px; padding: 28px; background: var(--surface); }
-.guide h3 { font-size: 22px; margin-bottom: 4px; }
-.guide p { margin: 0; color: var(--muted); }
-
-footer { border-top: 1px solid var(--rule); padding: 28px 0 40px; font-size: 14px; color: var(--muted); }
-footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
-
-@media (max-width: 760px) {
-  nav a.hide-s { display: none; }
-  .hero { grid-template-columns: 1fr; padding: 44px 0 40px; gap: 36px; }
-  .three { grid-template-columns: 1fr; }
-  .three div + div { border-left: 0; border-top: 1px solid var(--rule); }
-  .feats { grid-template-columns: 1fr; }
-  .gallery { grid-template-columns: repeat(2, 1fr); gap: 20px 14px; }
-  .phone { max-width: 220px; }
-}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('dolphin-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 </head>
 <body>
+<div class="book">
 
-<header>
-  <div class="wrap">
-    <a class="brand" href="#"><img src="assets/logo.svg" alt="" width="28" height="28">dolphin</a>
-    <nav>
-      <a class="hide-s" href="#how">How it works</a>
-      <a class="hide-s" href="#start">Get started</a>
-      <a href="https://pub.dev/packages/dolphin">pub.dev</a>
-      <a href="https://github.com/sanket-manohar/dolphin">GitHub</a>
-    </nav>
+<div class="menu">
+  <a class="mark" href="#intro"><img src="assets/logo.svg" alt="" width="28" height="28"><b>dolphin</b></a>
+  <button type="button" id="open-toc" aria-controls="side" aria-expanded="false">Contents</button>
+</div>
+
+<aside class="side" id="side">
+  <a class="mark" href="#intro"><img src="assets/logo.svg" alt="" width="34" height="34"><b>dolphin</b></a>
+  <p class="motto">Guided walkthroughs for Flutter</p>
+  <hr><hr>
+  <nav class="toc" aria-label="Contents">
+    <p class="part">Part one · The package</p>
+    <a href="#intro"><i>i.</i>Introduction</a>
+    <a href="#how"><i>ii.</i>How it works</a>
+    <a href="#features"><i>iii.</i>What it does</a>
+    <a href="#gallery"><i>iv.</i>In your app</a>
+    <a href="#start"><i>v.</i>Get started</a>
+    <a href="#guide"><i>vi.</i>Developer guide</a>
+    <p class="part">Part two · VS Code</p>
+    <a href="#extension"><i>vii.</i>Dolphin Walkthroughs</a>
+    <a href="#glance"><i>viii.</i>At a glance</a>
+    <a href="#tree"><i>ix.</i>The widget tree</a>
+    <a href="#form"><i>x.</i>The form and preview</a>
+    <a href="#json"><i>xi.</i>Code or JSON</a>
+    <a href="#design"><i>xii.</i>Design first</a>
+    <a href="#journeys"><i>xiii.</i>Journeys</a>
+    <a href="#attach"><i>xiv.</i>Attaching planned steps</a>
+    <a href="#helpers"><i>xv.</i>Hover, checks and PDF</a>
+    <a href="#themes"><i>xvi.</i>Light and dark</a>
+    <a href="#first"><i>xvii.</i>Your first walkthrough</a>
+    <a href="#reference"><i>xviii.</i>Commands and settings</a>
+    <a href="#faq"><i>xix.</i>Good to know</a>
+    <a href="#manual"><i>xx.</i>Manual and license</a>
+  </nav>
+  <div class="colophon">
+    <span>© 2026 <a href="https://sanketmanohar.com">Sanket Santosh Vidya Manohar</a></span>
+    <button class="theme-toggle" type="button" aria-label="Switch between light and dark"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6"/><path d="M8 2a6 6 0 0 0 0 12z" fill="currentColor"/></svg></button>
   </div>
-</header>
+</aside>
 
-<main class="wrap">
-  <div class="hero">
-    <div>
-      <p class="eyebrow">Flutter package · Android, iOS, web</p>
-      <h1>Guided walkthroughs that remember where every user left off.</h1>
-      <p class="lead">Highlight any widget, explain it, and let dolphin track what each user has seen on every page. No key lists, no manager class, no bookkeeping.</p>
-      <div class="install"><code id="cmd">flutter pub add dolphin</code><button type="button" id="copy">Copy</button></div>
-      <div class="actions">
-        <a class="btn primary" href="#start">Get started</a>
-        <a class="btn" href="dolphin-guide.pdf">Download the guide (PDF)</a>
+<main class="desk">
+<article class="sheet">
+  <div class="running"><span id="run-part">dolphin</span><span>sanket-manohar.github.io/dolphin</span></div>
+  <div class="pages">
+
+  <!-- Part one -->
+  <section class="ch" id="intro" data-part="Part one · The package">
+    <div class="body split even">
+      <div class="text">
+        <span class="num">Flutter package · Android, iOS, web</span>
+        <h1>Guided walkthroughs that <em>remember</em> where every user left off.</h1>
+        <p class="lead dropcap">Highlight any widget, explain it, and let dolphin track what each user has seen on every page. No key lists, no manager class, no bookkeeping.</p>
+        <div class="install"><code id="cmd-pub">flutter pub add dolphin</code><button type="button" data-copy="cmd-pub">Copy</button></div>
+        <div class="actions">
+          <a class="btn primary" href="#start">Get started</a>
+          <a class="btn" href="dolphin-guide.pdf">Developer guide (PDF)</a>
+        </div>
+      </div>
+      <div class="phones"><figure class="phone"><img src="assets/light.png" alt="A dolphin walkthrough step highlighting a button" width="400" height="820"></figure></div>
+    </div>
+  </section>
+
+  <section class="ch" id="how" data-part="Part one · The package">
+    <header><span class="num">Chapter ii</span><h2>Three widgets, each with a single job.</h2><p class="lead">Add a walkthrough to an existing app without restructuring it.</p></header>
+    <div class="body">
+      <div>
+        <div class="trio">
+          <div><code>Dolphin</code><h3>Once, for the app</h3><p>Wraps your app above MaterialApp. Stores progress and draws the overlay on every page.</p></div>
+          <div><code>DolphinScope</code><h3>One per page</h3><p>The unit of progress. Starts by itself, pauses when covered and resumes at the same step.</p></div>
+          <div><code>DolphinTarget</code><h3>One per widget</h3><p>Wraps what you want to explain. Only needs an id; the text can live in one central JSON.</p></div>
+        </div>
+<pre class="tree">Dolphin(controller)                    once, above MaterialApp
+ └─ MaterialApp
+     └─ DolphinScope(id: 'home')        one per page or section
+         └─ Scaffold
+             ├─ DolphinTarget(id: 'search')    one per widget to highlight
+             └─ DolphinTarget(id: 'profile')</pre>
       </div>
     </div>
-    <div class="shot"><div class="phone"><img src="assets/light.png" alt="A dolphin walkthrough step highlighting a button" width="400" height="820"></div></div>
-  </div>
+  </section>
 
-  <section id="how">
-    <h2>How it works</h2>
-    <p class="sub">Three widgets, each with a single job. Add a walkthrough to an existing app without restructuring it.</p>
-    <div class="three">
-      <div><code>Dolphin</code><h3>Once, for the app</h3><p>Wraps your app above MaterialApp. Stores progress and draws the overlay on every page.</p></div>
-      <div><code>DolphinScope</code><h3>One per page</h3><p>The unit of progress. Starts by itself, pauses when covered and resumes at the same step.</p></div>
-      <div><code>DolphinTarget</code><h3>One per widget</h3><p>Wraps what you want to explain. Only needs an id; the text can live in one central JSON.</p></div>
+  <section class="ch" id="features" data-part="Part one · The package">
+    <header><span class="num">Chapter iii</span><h2>Everything an onboarding flow needs, built in.</h2><p class="lead">Production features from the first release, with nothing to wire up by hand.</p></header>
+    <div class="body grid6">
+      <div><i>i.</i><h3>Starts on its own</h3><p>Each page with unseen tips begins its walkthrough automatically.</p></div>
+      <div><i>ii.</i><h3>Remembers progress</h3><p>Seen and skipped steps are saved on the device, per page.</p></div>
+      <div><i>iii.</i><h3>Journeys across pages</h3><p>Guide users through several pages in a fixed order, and resume later.</p></div>
+      <div><i>iv.</i><h3>Central JSON</h3><p>Change tip text and styling from your server without an app update.</p></div>
+      <div><i>v.</i><h3>Sync with your backend</h3><p>Export and import progress as plain JSON, so new devices skip what users have seen.</p></div>
+      <div><i>vi.</i><h3>Looks right everywhere</h3><p>Six tooltip styles, many highlight shapes, light and dark mode.</p></div>
     </div>
   </section>
 
-  <section>
-    <h2>What it does</h2>
-    <p class="sub">Everything a production onboarding flow needs, built in.</p>
-    <div class="feats">
-      <div><h3>Starts on its own</h3><p>Each page with unseen tips begins its walkthrough automatically.</p></div>
-      <div><h3>Remembers progress</h3><p>Seen and skipped steps are saved on the device, per page.</p></div>
-      <div><h3>Journeys across pages</h3><p>Guide users through several pages in a fixed order, and resume later.</p></div>
-      <div><h3>Central JSON</h3><p>Change tip text and styling from your server without an app update.</p></div>
-      <div><h3>Sync with your backend</h3><p>Export and import progress as plain JSON, so new devices skip what users have seen.</p></div>
-      <div><h3>Looks right everywhere</h3><p>Six tooltip styles, eight highlight shapes, light and dark mode.</p></div>
+  <section class="ch" id="gallery" data-part="Part one · The package">
+    <header><span class="num">Chapter iv</span><h2>Screens from the example app.</h2><p class="lead">The example app included with the package, in light and dark.</p></header>
+    <div class="body">
+      <div class="phones four">
+        <figure class="phone"><img src="assets/light.png" alt="Card tooltip in light mode" width="400" height="820"><figcaption>Card style</figcaption></figure>
+        <figure class="phone"><img src="assets/dark.png" alt="Card tooltip in dark mode" width="400" height="820"><figcaption>Dark mode</figcaption></figure>
+        <figure class="phone"><img src="assets/bubble.png" alt="Bubble tooltip with dots pointer" width="400" height="820"><figcaption>Bubble style</figcaption></figure>
+        <figure class="phone"><img src="assets/progress.png" alt="Settings page with progress" width="400" height="820"><figcaption>Progress and reset</figcaption></figure>
+      </div>
     </div>
   </section>
 
-  <section>
-    <h2>In your app</h2>
-    <p class="sub">Screens from the example app included with the package.</p>
-    <div class="gallery">
-      <figure><div class="phone"><img src="assets/light.png" alt="Card tooltip in light mode" width="400" height="820"></div><figcaption>Card style</figcaption></figure>
-      <figure><div class="phone"><img src="assets/dark.png" alt="Card tooltip in dark mode" width="400" height="820"></div><figcaption>Dark mode</figcaption></figure>
-      <figure><div class="phone"><img src="assets/bubble.png" alt="Bubble tooltip with dots pointer" width="400" height="820"></div><figcaption>Bubble style</figcaption></figure>
-      <figure><div class="phone"><img src="assets/progress.png" alt="Settings page with progress" width="400" height="820"></div><figcaption>Progress and reset</figcaption></figure>
-    </div>
-  </section>
-
-  <section id="start">
-    <h2>Get started</h2>
-    <p class="sub">Add the package, wrap your app once, then mark a page and the widgets to explain.</p>
+  <section class="ch" id="start" data-part="Part one · The package">
+    <header><span class="num">Chapter v</span><h2>Wrap your app once, then mark what to explain.</h2><p class="lead">Add the package, put one <code>Dolphin</code> above your app, then mark a page and the widgets on it.</p></header>
+    <div class="body">
 <pre><code>import 'package:dolphin/dolphin.dart';
 
 final guide = DolphinController();
@@ -178,31 +150,252 @@ DolphinScope(
     ]),
   ),
 );</code></pre>
-  </section>
-
-  <section>
-    <div class="guide">
-      <div><h3>Setup and Developer Guide</h3><p>Installation, quick start, customising, journeys, sync and troubleshooting, in 11 pages.</p></div>
-      <a class="btn primary" href="dolphin-guide.pdf">Download PDF</a>
     </div>
   </section>
+
+  <section class="ch" id="guide" data-part="Part one · The package">
+    <header><span class="num">Chapter vi</span><h2>The developer guide, and a new companion.</h2></header>
+    <div class="body split even">
+      <div class="endplate">
+        <div class="orn">❦</div>
+        <h3>Setup and Developer Guide</h3>
+        <p>Installation, quick start, customising, journeys, sync and troubleshooting, in 11 pages.</p>
+        <div class="actions"><a class="btn primary" href="dolphin-guide.pdf">Download PDF</a></div>
+      </div>
+      <div class="text">
+        <span class="num">New · VS Code extension</span>
+        <h3 style="font-size:24px">Build walkthroughs without writing them.</h3>
+        <p>See the widget tree of any page, double-click a widget and fill in a form. Dolphin Walkthroughs writes the code, keeps the JSON in sync, and lets you design the whole tour in a graph before the screens exist.</p>
+        <div class="actions"><a class="btn" href="#extension">Read part two</a><a class="btn" href="https://marketplace.visualstudio.com/items?itemName=sanket-manohar.dolphin-walkthroughs">Marketplace</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Part two -->
+  <section class="ch" id="extension" data-part="Part two · VS Code extension">
+    <div class="body split">
+      <div class="text">
+        <span class="num">VS Code extension · Windows, macOS, Linux</span>
+        <h1>Double-click a widget. <em>It becomes a walkthrough step.</em></h1>
+        <p class="lead dropcap">Dolphin Walkthroughs shows the widget tree of the page you are editing. Pick a widget, fill in a form with every dolphin option, watch the preview, and the extension writes the code.</p>
+        <div class="install"><code id="cmd-ext">ext install sanket-manohar.dolphin-walkthroughs</code><button type="button" data-copy="cmd-ext">Copy</button></div>
+        <div class="actions">
+          <a class="btn primary" href="https://marketplace.visualstudio.com/items?itemName=sanket-manohar.dolphin-walkthroughs">Install from Marketplace</a>
+          <a class="btn" href="dolphin-vscode-manual.pdf">User manual (PDF)</a>
+        </div>
+      </div>
+      <figure class="fig"><div class="plate"><img src="assets/vscode/graph.jpg" alt="The walkthrough graph with three pages and a journey" width="1400" height="807"></div></figure>
+    </div>
+  </section>
+
+  <section class="ch" id="glance" data-part="Part two · VS Code extension">
+    <header><span class="num">Chapter viii</span><h2>Everything dolphin can do, one double-click away.</h2><p class="lead">No parameter names to look up, no JSON to keep in step by hand, and a map of every walkthrough in the project.</p></header>
+    <div class="body grid6">
+      <div><i>i.</i><h3>Widget tree</h3><p>The widgets of the open file, nested as in the code, without helper objects or callbacks. It follows your cursor.</p></div>
+      <div><i>ii.</i><h3>Every option in a form</h3><p>Content, rules, pointer, barrier, highlight, tooltip, text, counter, buttons, animation, behaviour and dark mode.</p></div>
+      <div><i>iii.</i><h3>Live preview</h3><p>A sketch of the step in light and dark, and a Code tab that shows exactly what will be written.</p></div>
+      <div><i>iv.</i><h3>Code or JSON</h3><p>Keep content on the widget or in a JSON config the extension creates, registers and loads at startup.</p></div>
+      <div><i>v.</i><h3>Graph and design first</h3><p>Plan pages, steps and journeys before the screens exist, then attach them to widgets later.</p></div>
+      <div><i>vi.</i><h3>Map, PDF and checks</h3><p>Every scope and step in one list, a PDF to share with your team, and problems shown while you type.</p></div>
+    </div>
+  </section>
+
+  <section class="ch" id="tree" data-part="Part two · VS Code extension">
+    <header><span class="num">Chapter ix</span><h2>See the page as a tree.</h2></header>
+    <div class="body split wide">
+      <div class="text">
+        <p>Click the dolphin icon in the activity bar. The Widget Tree lists the widgets of the file you have open, page by page, with hints from their text, tooltip or icon.</p>
+        <ul class="tidy">
+          <li><b>Click</b> a row to jump to the code.</li>
+          <li><b>Double-click</b> to wrap it, or to configure it when it is already a dolphin widget.</li>
+          <li>Or press <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>T</kbd> on any widget in the editor.</li>
+        </ul>
+        <p class="caption">The screens in part two are from a small shop app with three pages: home, cart and profile.</p>
+      </div>
+      <figure class="fig"><div class="plate"><img src="assets/vscode/widget-tree.jpg" alt="The widget tree beside the code" width="1400" height="807"></div></figure>
+    </div>
+  </section>
+
+  <section class="ch" id="form" data-part="Part two · VS Code extension">
+    <header><span class="num">Chapter x</span><h2>Fill in a form, not a constructor.</h2></header>
+    <div class="body split wide">
+      <div class="text">
+        <p>Choose <b>DolphinTarget</b> for a step, <b>DolphinScope</b> for a page, or <b>Dolphin</b> on <code>MaterialApp</code> for the app root. The id is suggested for you.</p>
+        <ul class="tidy">
+          <li>Every field shows its default. Empty means “use the default”.</li>
+          <li>The preview updates as you type, in light and dark.</li>
+          <li>Editing an existing widget keeps anything the form does not know, exactly as you wrote it.</li>
+        </ul>
+      </div>
+      <figure class="fig two">
+        <div class="plate"><img src="assets/vscode/form.jpg" alt="The configure form for a new step" width="1090" height="1660"></div>
+        <div class="plate"><img src="assets/vscode/preview.jpg" alt="The live preview of a step" width="1090" height="1660"></div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="ch" id="json" data-part="Part two · VS Code extension">
+    <header><span class="num">Chapter xi</span><h2>In code or in JSON.</h2></header>
+    <div class="body split wide">
+      <div class="text">
+        <p>Choose per step where its content lives. In JSON mode the widget keeps only its id, and the title, description and look go into your walkthrough config.</p>
+        <ul class="tidy">
+          <li>The config is created at <code>assets/walkthrough.json</code> and registered in <code>pubspec.yaml</code>.</li>
+          <li>One click makes <code>main()</code> load it at startup.</li>
+          <li>Existing configs are read and updated in place, with your comments kept.</li>
+        </ul>
+      </div>
+      <figure class="fig two">
+        <div class="plate"><img src="assets/vscode/json-mode.jpg" alt="The form with In JSON config selected" width="1090" height="1660"></div>
+        <div class="plate"><img src="assets/vscode/json-code.jpg" alt="The code tab showing Dart and JSON" width="1090" height="1660"></div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="ch" id="design" data-part="Part two · VS Code extension">
+    <header><span class="num">Chapter xii</span><h2>Design first, attach later.</h2></header>
+    <div class="body split wide">
+      <div class="text">
+        <p>The walkthrough graph shows each page as a lane and its steps as cards. Add pages, steps and journeys before the screens are built. They are saved to the JSON config as <i>planned</i>.</p>
+        <ul class="tidy">
+          <li><b>Drag</b> cards to change the order.</li>
+          <li><b>Double-click</b> a card to open its widget.</li>
+          <li>When the page exists, double-click a widget and choose <b>Planned step</b>.</li>
+        </ul>
+      </div>
+      <figure class="fig"><div class="plate"><img src="assets/vscode/design.jpg" alt="Designing a new step in the graph" width="1400" height="807"></div></figure>
+    </div>
+  </section>
+
+  <section class="ch" id="journeys" data-part="Part two · VS Code extension">
+    <header><span class="num">Chapter xiii</span><h2>Journeys across pages.</h2></header>
+    <div class="body split wide">
+      <div class="text">
+        <p>Link pages in order, choose the steps of each page and the route that opens it. Click a journey in the graph to see its path; the steps it skips are faded.</p>
+        <p>Start it in your app with <code>Dolphin.of(context).startJourney('onboarding')</code>.</p>
+      </div>
+      <figure class="fig"><div class="plate"><img src="assets/vscode/journey.jpg" alt="The journey editor in the graph" width="1400" height="807"></div></figure>
+    </div>
+  </section>
+
+  <section class="ch" id="attach" data-part="Part two · VS Code extension">
+    <header><span class="num">Chapter xiv</span><h2>Attach planned steps to widgets.</h2></header>
+    <div class="body split wide">
+      <div class="text">
+        <p>Planned steps from every page are offered when you double-click a widget, steps of the current page first. The widget is wrapped with that id and the content stays in JSON.</p>
+      </div>
+      <figure class="fig"><div class="plate"><img src="assets/vscode/attach.jpg" alt="The list of planned steps to attach" width="1400" height="630"></div></figure>
+    </div>
+  </section>
+
+  <section class="ch" id="helpers" data-part="Part two · VS Code extension">
+    <header><span class="num">Chapter xv</span><h2>Hover, checks and a PDF for the team.</h2></header>
+    <div class="body split wide">
+      <div class="text">
+        <p>Hover a step id to see its content and position. Duplicate ids, steps with no content, unknown styles and a missing app root are marked as you type.</p>
+        <p>Export the whole map as a PDF to share with design or QA. Planned steps are listed too, so it doubles as a to-do list.</p>
+      </div>
+      <figure class="fig"><div class="plate"><img src="assets/vscode/hover.jpg" alt="Hover information on a step id" width="1400" height="579"></div></figure>
+    </div>
+  </section>
+
+  <section class="ch" id="themes" data-part="Part two · VS Code extension">
+    <header><span class="num">Chapter xvi</span><h2>At home in any theme.</h2></header>
+    <div class="body split wide">
+      <div class="text">
+        <p>Every view and panel follows your VS Code colour theme, light, dark or high contrast, on Windows, macOS and Linux.</p>
+        <p class="caption">The configure panel beside the code, in the light theme, and the graph in a dark one.</p>
+      </div>
+      <figure class="fig two col">
+        <div class="plate"><img src="assets/vscode/after-wrap.jpg" alt="The widget tree, the code and the configure panel" width="1400" height="807"></div>
+        <div class="plate"><img src="assets/vscode/dark-graph.jpg" alt="The walkthrough graph in a dark theme" width="1400" height="807"></div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="ch" id="first" data-part="Part two · VS Code extension">
+    <header><span class="num">Chapter xvii</span><h2>Your first walkthrough in seven steps.</h2><p class="lead">Each step is described with screenshots in the user manual.</p></header>
+    <div class="body steps">
+      <div><b>Install the extension</b> from the Marketplace, or with <b>Install from VSIX…</b> in the Extensions view.</div>
+      <div><b>Open your Flutter project.</b> Run <b>Dolphin: Add dolphin to pubspec.yaml</b> if the package is not added yet.</div>
+      <div><b>Open the Dolphin view</b> from the activity bar. The Widget Tree shows the open file.</div>
+      <div><b>Wrap the app.</b> Double-click <code>MaterialApp</code>, choose <b>Dolphin (app root)</b> and click <b>Wrap app</b>.</div>
+      <div><b>Mark a page.</b> Double-click its <code>Scaffold</code> and choose <b>DolphinScope</b>.</div>
+      <div><b>Add a step.</b> Double-click a widget, choose <b>DolphinTarget</b>, write a title and description, and click <b>Wrap widget</b>.</div>
+      <div><b>Run the app.</b> The walkthrough starts when the page opens and remembers what each user has seen.</div>
+    </div>
+  </section>
+
+  <section class="ch" id="reference" data-part="Part two · VS Code extension">
+    <header><span class="num">Chapter xviii</span><h2>Commands and settings.</h2><p class="lead">Every command is in the Command Palette under <b>Dolphin:</b>, in the editor's right-click menu and in the light bulb menu on any widget.</p></header>
+    <div class="body tables">
+      <table>
+        <tr><th>Command</th><th>What it does</th></tr>
+        <tr><td>Wrap with DolphinTarget…</td><td>Make the widget a step. <kbd>Ctrl</kbd> <kbd>Alt</kbd> <kbd>T</kbd></td></tr>
+        <tr><td>Wrap with DolphinScope…</td><td>Make it a page or section.</td></tr>
+        <tr><td>Wrap with Dolphin (app root)…</td><td>Wrap the app and set up the controller.</td></tr>
+        <tr><td>Configure…</td><td>Open the form for the widget under the cursor.</td></tr>
+        <tr><td>Remove wrapper (keep child)</td><td>Take a dolphin widget away.</td></tr>
+        <tr><td>Open JSON config</td><td>Open or create the config.</td></tr>
+        <tr><td>Load JSON config at app startup</td><td>Change <code>main()</code> to load it.</td></tr>
+        <tr><td>Add journey…</td><td>Add a cross-page journey.</td></tr>
+        <tr><td>Open walkthrough graph</td><td>Lanes, steps, journeys and design.</td></tr>
+        <tr><td>Export walkthrough map as PDF…</td><td>Save the map as a PDF.</td></tr>
+        <tr><td>About Dolphin</td><td>Links, downloads, likes and points.</td></tr>
+      </table>
+      <div>
+        <table>
+          <tr><th>Setting</th><th>Default</th></tr>
+          <tr><td><code>dolphin.configFile</code></td><td>empty: found automatically</td></tr>
+          <tr><td><code>dolphin.defaultStorage</code></td><td><code>inline</code> or <code>json</code></td></tr>
+          <tr><td><code>dolphin.formatAfterEdit</code></td><td>on</td></tr>
+          <tr><td><code>dolphin.followCursor</code></td><td>on</td></tr>
+          <tr><td><code>dolphin.codeLens</code></td><td>on</td></tr>
+          <tr><td><code>dolphin.diagnostics</code></td><td>on</td></tr>
+        </table>
+        <p class="small">Snippets: <code>dscope</code>, <code>dtarget</code>, <code>dtargetid</code>, <code>dstep</code>, <code>dtheme</code>, <code>droot</code>, <code>dreplay</code>, <code>dreset</code>, <code>djourney</code>, <code>denabled</code>, <code>dbuilder</code>, <code>dcondition</code>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="ch" id="faq" data-part="Part two · VS Code extension">
+    <header><span class="num">Chapter xix</span><h2>Good to know.</h2><p class="lead">Short answers. The manual has the details.</p></header>
+    <div class="body qa">
+      <div><h3>Does it work if dolphin is already in my project?</h3><p>Yes. It reads your existing dolphin widgets and JSON config as they are. Steps already in the JSON open in JSON mode with their values, and edits change only their own entry.</p></div>
+      <div><h3>Does it run on Windows and macOS?</h3><p>Yes, and on Linux. It has no native parts, reads and writes Windows line endings correctly, and its panels re-send their data whenever they open, so they never stay blank.</p></div>
+      <div><h3>Does it collect any data?</h3><p>No. It works offline and changes only the files you ask it to. Only the About page reads public download and like counts from pub.dev and the Marketplace, when you open it.</p></div>
+      <div><h3>Can I undo a change?</h3><p>Every wrap, edit and removal is a normal editor change, so <kbd>Ctrl</kbd> <kbd>Z</kbd> takes it back, and your version control shows exactly what changed.</p></div>
+      <div><h3>What do I need?</h3><p>VS Code 1.85 or newer and a Flutter project using dolphin 1.0 or newer. The Dart extension is recommended for formatting after edits.</p></div>
+      <div><h3>Where do I report a problem?</h3><p>Open an issue on the <a href="https://github.com/sanket-manohar/dolphin/issues">dolphin repository</a>, or use <b>Report an issue</b> on the About page.</p></div>
+    </div>
+  </section>
+
+  <section class="ch" id="manual" data-part="Part two · VS Code extension">
+    <header><span class="num">Chapter xx</span><h2>The user manual.</h2></header>
+    <div class="body">
+      <div class="endplate">
+        <div class="orn">❦</div>
+        <h3>Dolphin Walkthroughs · User Manual</h3>
+        <p>Installation, every feature and option, the graph and design-first workflow, journeys, settings and troubleshooting, with screenshots on every page.</p>
+        <div class="actions">
+          <a class="btn primary" href="dolphin-vscode-manual.pdf">Download PDF</a>
+          <a class="btn" href="https://marketplace.visualstudio.com/items?itemName=sanket-manohar.dolphin-walkthroughs">Marketplace</a>
+        </div>
+        <p class="fine">Designed and developed by <a href="https://sanketmanohar.com">Sanket Santosh Vidya Manohar</a>.<br>Free to use under the <a href="vscode/LICENSE.txt">BSD 3-Clause License</a>. Provided as is, without warranty. <a href="vscode/DISCLAIMER.txt">Disclaimer</a>.<br>The dolphin package: <a href="https://pub.dev/packages/dolphin">pub.dev</a> · <a href="https://github.com/sanket-manohar/dolphin">GitHub</a> · <a href="https://github.com/sanket-manohar/dolphin/blob/main/LICENSE">license</a></p>
+      </div>
+    </div>
+  </section>
+
+  </div>
+  <div class="folio">
+    <button type="button" id="prev" aria-label="Previous chapter">← <span id="prev-t"></span></button>
+    <span class="n" id="folio">i</span>
+    <button type="button" id="next" aria-label="Next chapter"><span id="next-t"></span> →</button>
+  </div>
+</article>
 </main>
 
-<footer>
-  <div class="wrap">
-    <span>© 2026 <a href="https://sanketmanohar.com">Sanket Santosh Vidya Manohar</a></span>
-    <span>Free to use under the <a href="https://github.com/sanket-manohar/dolphin/blob/main/LICENSE">BSD 3-Clause License</a>. Provided as is, without warranty.</span>
-  </div>
-</footer>
-
-<script>
-document.getElementById('copy').addEventListener('click', function () {
-  var b = this;
-  navigator.clipboard.writeText(document.getElementById('cmd').textContent).then(function () {
-    b.textContent = 'Copied';
-    setTimeout(function () { b.textContent = 'Copy'; }, 1500);
-  }).catch(function () {});
-});
-</script>
+</div>
+<script src="assets/site.js"></script>
 </body>
 </html>
